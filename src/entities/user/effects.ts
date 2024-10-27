@@ -1,6 +1,7 @@
 import { createEffect } from "effector";
 import { Login, User } from "./user";
 import { $host } from "../../shared/api";
+import { IResponseRegisterData } from ".";
 
 export interface IResponse<T> {
   success: boolean;
@@ -28,14 +29,16 @@ export interface IResetRequest {
 
 export const registerFx = createEffect<
   IRegisterRequest,
-  IResponse<User>,
+  IResponse<IResponseRegisterData>,
   Error
 >(async (requestBody) => {
   try {
-    const { data } = await $host.post<IResponse<User>>(
+    const { data, status } = await $host.post<IResponse<IResponseRegisterData>>(
       "/registration/email",
       requestBody
     );
+    if (status !== 200) throw new Error("Invalid status code!");
+    localStorage.setItem("token", data.data.token);
     return data;
   } catch (err) {
     throw new Error(`${err}`);
@@ -45,10 +48,14 @@ export const registerFx = createEffect<
 export const loginFx = createEffect<ILoginRequest, IResponse<Login>, Error>(
   async (requestBody) => {
     try {
-      const { data } = await $host.post<IResponse<Login>>(
+      const { data, status } = await $host.post<IResponse<Login>>(
         "/token",
         requestBody
       );
+
+      if (status !== 200) throw new Error("Invalid status code!");
+      localStorage.setItem("token", data.data.token);
+
       return data;
     } catch (err) {
       throw new Error(`${err}`);

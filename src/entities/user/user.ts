@@ -1,5 +1,6 @@
 import { createStore } from "effector";
 import { loginFx, registerFx } from "./effects";
+import { IResponseRegisterData } from ".";
 
 export type User = {
   id: number;
@@ -12,7 +13,7 @@ export type Login = {
   userId: number;
 };
 
-export const userStore = createStore<User | null>(null).on(
+export const userStore = createStore<IResponseRegisterData | null>(null).on(
   registerFx.doneData,
   (_, user) => user.data
 );
