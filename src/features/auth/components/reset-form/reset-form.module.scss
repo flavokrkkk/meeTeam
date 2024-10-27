@@ -1,0 +1,25 @@
+@import "../../styles/index.scss";
+
+.itemContainer {
+  @include item-form;
+}
+
+.formContainer {
+  display: flex;
+  width: 520px;
+  flex-direction: column;
+  gap: 10px;
+  label {
+    margin-bottom: 2px;
+  }
+
+  p {
+    text-align: center;
+  }
+}
+
+.accepRegister {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}

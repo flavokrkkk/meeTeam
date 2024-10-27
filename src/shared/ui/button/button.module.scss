@@ -1,0 +1,41 @@
+button {
+  border: none;
+  color: white;
+  width: 100%;
+}
+
+.smSize {
+  height: 49px;
+}
+
+.mdSize {
+  height: 42px;
+}
+
+.lgSize {
+  height: 35px;
+}
+
+.smRounded {
+  border-radius: 10px;
+}
+
+.mdRounded {
+  border-radius: 12px;
+}
+
+.lgRounded {
+  border-radius: 15px;
+}
+
+.secondary {
+  background-color: lightgrey;
+}
+
+.default {
+  background-color: #4763e4;
+}
+
+.outlined {
+  background-color: white;
+}

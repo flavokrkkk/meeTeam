@@ -1,0 +1,29 @@
+@import "../../styles/index.scss";
+
+.itemContainer {
+  @include item-form;
+}
+
+.formContainer {
+  display: flex;
+  width: 520px;
+  flex-direction: column;
+  gap: 10px;
+  label {
+    margin-bottom: 2px;
+  }
+
+  p {
+    text-align: center;
+    cursor: pointer;
+  }
+}
+
+.footerForm {
+  width: 100%;
+}
+
+span {
+  color: blue;
+  cursor: pointer;
+}
