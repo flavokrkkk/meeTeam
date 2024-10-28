@@ -20,10 +20,17 @@ export const buttonVariantClasses: Record<EButtonVariant, string> = {
   [EButtonVariant.DEFAULT]: styles.default,
 };
 
+export const buttonTextClasses: Record<"start" | "end" | "center", string> = {
+  ["start"]: styles.textStart,
+  ["end"]: styles.textEnd,
+  ["center"]: styles.textCenter,
+};
+
 export interface InputProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   customProp?: string;
   sizes?: EButtonSizes;
+  text?: "start" | "end" | "center";
   rounded?: EBorderRadius;
   variant?: EButtonVariant;
 }
@@ -33,6 +40,7 @@ const Button = React.forwardRef<HTMLButtonElement, InputProps>(
       sizes = EButtonSizes.SM,
       variant = EButtonVariant.DEFAULT,
       rounded = EBorderRadius.MD,
+      text = "center",
       type,
       ...props
     },
@@ -41,7 +49,7 @@ const Button = React.forwardRef<HTMLButtonElement, InputProps>(
     return (
       <button
         type={type}
-        className={`${buttonSizesClasses[sizes]} ${buttonClassesRounded[rounded]} ${buttonVariantClasses[variant]}`}
+        className={`${buttonSizesClasses[sizes]} ${buttonTextClasses[text]} ${buttonClassesRounded[rounded]} ${buttonVariantClasses[variant]}`}
         ref={ref}
         {...props}
       />

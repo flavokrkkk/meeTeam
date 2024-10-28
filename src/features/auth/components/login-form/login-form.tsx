@@ -5,8 +5,11 @@ import styles from "./login-form.module.scss";
 import { ERoutesNames } from "../../../../shared/utils/routes-name";
 import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import { loginFx } from "../../../../entities/user/effects";
+import { useUnit } from "effector-react";
+import { errorStore } from "../../../../entities/user/user";
 
 const LoginForm = () => {
+  const error = useUnit(errorStore);
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -43,25 +46,31 @@ const LoginForm = () => {
   const navigateToReset = () => {
     navigate(ERoutesNames.RESET);
   };
-
   return (
     <form className={styles.formContainer} onSubmit={onFormSubmit}>
       <section className={styles.itemContainer}>
-        <label>Email</label>
+        <label className={error?.length ? styles.error : styles.default}>
+          Email
+        </label>
         <Input
+          isError={!!error?.length}
           name="email"
           value={loginData.email}
           onChange={handleChangeValue}
         />
       </section>
       <section className={styles.itemContainer}>
-        <label>Mot de passe</label>
+        <label className={error?.length ? styles.error : styles.default}>
+          Mot de passe
+        </label>
         <Input
+          isError={!!error?.length}
           name="password"
           value={loginData.password}
           onChange={handleChangeValue}
         />
       </section>
+      {error?.length && <p className={styles.error}>{error}</p>}
       <p onClick={navigateToReset}>Mot de passe oublié ?</p>
       <section className={styles.footerForm}>
         <Button>Se connecter</Button>

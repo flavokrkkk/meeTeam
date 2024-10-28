@@ -1,0 +1,30 @@
+.listWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemWrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.subroutesContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 5px 15px 5px;
+}
+
+.subroutesItem {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+
+.isActiveItem {
+  color: white;
+}
+
+.noActiveItem {
+  color: rgb(189, 187, 187);
+}

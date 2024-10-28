@@ -1,6 +1,15 @@
 input {
-  border: 1px solid #e4e4e7;
   padding: 5px;
+  outline: none;
+}
+
+.default {
+  border: 1px solid #e4e4e7;
+}
+
+.error {
+  border: 1px solid red;
+  color: red;
 }
 
 .smSize {

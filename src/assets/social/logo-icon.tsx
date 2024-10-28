@@ -1,8 +1,15 @@
-const LogoIcon = () => {
+import { FC } from "react";
+import { ISizes } from "../utils/icon";
+
+interface ILogoIcon {
+  size?: ISizes;
+}
+
+const LogoIcon: FC<ILogoIcon> = ({ size = { height: 43, width: 47 } }) => {
   return (
     <svg
-      width="47"
-      height="43"
+      width={size.width}
+      height={size.height}
       viewBox="0 0 47 43"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

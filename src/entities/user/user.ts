@@ -22,3 +22,8 @@ export const loginStore = createStore<Login | null>(null).on(
   loginFx.doneData,
   (_, login) => login.data
 );
+
+export const errorStore = createStore<string | null>(null).on(
+  loginFx.failData,
+  (_, data) => data.message
+);

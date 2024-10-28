@@ -1,0 +1,18 @@
+.container {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  background-color: #f4f5f7;
+}
+
+.wrapper {
+  display: flex;
+  height: calc(100vh - 6rem);
+  flex-direction: column;
+  width: 100%;
+}
+.outletWrapper {
+  flex-grow: inherit;
+  overflow: auto;
+  height: 100vh;
+}

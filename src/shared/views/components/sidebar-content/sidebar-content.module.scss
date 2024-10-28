@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px;
+  background-color: #0e1b6b;
+}
+
+.sidebarFooter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px;
+  color: white;
+  font-weight: 400;
+
+  span {
+    font-size: 14px;
+  }
+}
+
+.sidebarFooterInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+li {
+  text-decoration: none;
+  list-style: none;
+}
+
+span {
+  color: white;
+}
+
+.wrapper {
+  padding: 15px;
+}
+
+.listContainer {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}

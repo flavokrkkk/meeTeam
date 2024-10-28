@@ -52,13 +52,12 @@ export const loginFx = createEffect<ILoginRequest, IResponse<Login>, Error>(
         "/token",
         requestBody
       );
-
       if (status !== 200) throw new Error("Invalid status code!");
       localStorage.setItem("token", data.data.token);
-
       return data;
     } catch (err) {
-      throw new Error(`${err}`);
+      console.error(err);
+      throw new Error("Данные авторизации неверны!");
     }
   }
 );
@@ -73,7 +72,8 @@ export const resetFx = createEffect<IResetRequest, IResponse<User>, Error>(
       console.log(data);
       return data;
     } catch (err) {
-      throw new Error(`${err}`);
+      console.error(err);
+      throw new Error(`Не удалось сбросить пароль!`);
     }
   }
 );

@@ -19,16 +19,25 @@ export interface InputProps
   customProp?: string;
   sizes?: EInputSizes;
   rounded?: EBorderRadius;
+  isError?: boolean;
 }
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
-    { sizes = EInputSizes.SM, rounded = EBorderRadius.MD, type, ...props },
+    {
+      sizes = EInputSizes.SM,
+      isError,
+      rounded = EBorderRadius.MD,
+      type,
+      ...props
+    },
     ref
   ) => {
     return (
       <input
         type={type}
-        className={`${inputSizesClasses[sizes]} ${inputSizesRounded[rounded]}`}
+        className={`${inputSizesClasses[sizes]} ${inputSizesRounded[rounded]} ${
+          isError ? styles.error : styles.default
+        }`}
         ref={ref}
         {...props}
       />
