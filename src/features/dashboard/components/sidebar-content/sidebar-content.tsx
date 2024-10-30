@@ -1,9 +1,9 @@
 import LogoIcon from "../../../../assets/social/logo-icon";
 import LogoIconTitle from "../../../../assets/social/logo-title-icon";
-import { navigateData } from "../../../utils/navigate-data";
 import styles from "./sidebar-content.module.scss";
 import { useCallback, useState } from "react";
 import SideBarContentItem from "../sidebar-content-item/sidebar-content-item";
+import { navigateData } from "../../../../shared/utils/navigate-data";
 
 const SidebarContent = () => {
   const [navigates, setNavigates] = useState(navigateData);

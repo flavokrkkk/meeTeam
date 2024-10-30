@@ -1,0 +1,27 @@
+.headerContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigateContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.navigation {
+  font-size: 14px;
+  color: #71717a;
+}
+
+.iconWrapper {
+  color: #71717a;
+  display: flex;
+  align-items: center;
+}
+
+.navigationHelper {
+  color: #4658ac;
+  font-size: 14px;
+}

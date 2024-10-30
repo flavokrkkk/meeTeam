@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { INavigateData } from "../../../utils/navigate-data";
 import ArrowIcon from "../../../../assets/social/arrow-icon";
 import styles from "./sidebar-content-item.module.scss";
 import SidebarContentList from "../sidebar-content-list/sidebar-content-list";
+import { INavigateData } from "../../../../shared/utils/navigate-data";
 
 interface ISideBarContentItem {
   navigate: INavigateData;
@@ -30,6 +30,7 @@ const SideBarContentItem: FC<ISideBarContentItem> = ({
         </div>
         <span className={isActiveStyle}>
           <ArrowIcon
+            size={{ height: 12, width: 12 }}
             rotate={{ rotate: navigate.isActive ? "0deg" : "180deg" }}
           />
         </span>

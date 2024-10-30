@@ -6,6 +6,7 @@ export const inputSizesClasses: Record<EInputSizes, string> = {
   [EInputSizes.LG]: styles.lgSize,
   [EInputSizes.MD]: styles.mdSize,
   [EInputSizes.SM]: styles.smSize,
+  [EInputSizes.MAX]: styles.maxSize,
 };
 
 export const inputSizesRounded: Record<EBorderRadius, string> = {
@@ -20,12 +21,14 @@ export interface InputProps
   sizes?: EInputSizes;
   rounded?: EBorderRadius;
   isError?: boolean;
+  isBorder?: boolean;
 }
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       sizes = EInputSizes.SM,
       isError,
+      isBorder = true,
       rounded = EBorderRadius.MD,
       type,
       ...props
@@ -36,7 +39,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={`${inputSizesClasses[sizes]} ${inputSizesRounded[rounded]} ${
-          isError ? styles.error : styles.default
+          isError ? styles.error : isBorder ? styles.default : styles.none
         }`}
         ref={ref}
         {...props}

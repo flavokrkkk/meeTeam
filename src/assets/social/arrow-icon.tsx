@@ -1,16 +1,20 @@
 import { FC } from "react";
-import { IRotate } from "../utils/icon";
+import { IRotate, ISizes } from "../utils/icon";
 
 interface IArrowIcon {
   rotate?: IRotate;
+  size?: ISizes;
 }
 
-const ArrowIcon: FC<IArrowIcon> = ({ rotate = { rotate: "180deg" } }) => {
+const ArrowIcon: FC<IArrowIcon> = ({
+  rotate = { rotate: "180deg" },
+  size = { height: 9, width: 15 },
+}) => {
   return (
     <svg
       style={rotate}
-      width="15"
-      height="9"
+      width={size.width}
+      height={size.height}
       viewBox="0 0 15 9"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

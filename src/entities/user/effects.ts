@@ -2,12 +2,7 @@ import { createEffect } from "effector";
 import { Login, User } from "./user";
 import { $host } from "../../shared/api";
 import { IResponseRegisterData } from ".";
-
-export interface IResponse<T> {
-  success: boolean;
-  message: string;
-  data: T;
-}
+import { IResponse } from "..";
 
 export interface IRegisterRequest {
   email: string;

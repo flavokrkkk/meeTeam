@@ -3,10 +3,7 @@ import { ERoutesNames } from "../utils/routes-name";
 import LoginPage from "../../features/auth/pages/LoginPage";
 import ResetPage from "../../features/auth/pages/ResetPage";
 import RegisterPage from "../../features/auth/pages/RegisterPage";
-import AuthLayout from "../views/components/auth-layout/auth-layout";
-import Layout from "../views/components/layout/layout";
-import DashboardLayout from "../views/components/dashboard-layout/dashboard-layout";
-import DashboardUtilisateursPage from "../../features/dashboard/pages/dashboard-utilisateurs-page";
+import DashboardUtilisateursPage from "../../features/dashboard/pages/dashboard-utilisateurs-page/dashboard-utilisateurs-page";
 import DashboardBasePage from "../../features/dashboard/pages/dashboard-base-page";
 import DashboardControle from "../../features/dashboard/pages/dashboard-controle";
 import DashboardWorkflowPage from "../../features/dashboard/pages/dashboard-workflow-page";
@@ -14,6 +11,9 @@ import DashboardAlertsPage from "../../features/dashboard/pages/dashboard-alerts
 import DashboardRolesPage from "../../features/dashboard/pages/dashboard-roles-page";
 import DashboardReferencesPage from "../../features/dashboard/pages/dashboard-references-page";
 import DashboardCalendrierPage from "../../features/dashboard/pages/dashboard-calendrier-page";
+import DashboardLayout from "../../features/dashboard/views/dashboard-layout/dashboard-layout";
+import AuthLayout from "../views/auth-layout/auth-layout";
+import Layout from "../../features/dashboard/views/layout/layout";
 
 export const routes = createBrowserRouter([
   {
@@ -70,6 +70,10 @@ export const routes = createBrowserRouter([
             path: ERoutesNames.DASHBOARD_CALENDRIER,
             element: <DashboardCalendrierPage />,
           },
+          {
+            path: "*",
+            element: <DashboardUtilisateursPage />,
+          },
         ],
       },
       {
@@ -83,6 +87,10 @@ export const routes = createBrowserRouter([
       {
         path: ERoutesNames.RESET,
         element: <ResetPage />,
+      },
+      {
+        path: "*",
+        element: <Navigate to={ERoutesNames.DASHBOARD} replace />,
       },
     ],
   },

@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+}
+
+.buttonWrapper {
+  width: 226px;
+}
+
+.tableContainer {
+  background-color: #fff;
+  height: 100%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.iconContainer {
+  padding-left: 10px;
+  padding-top: 2px;
+}
+
+.footerContainer {
+  padding: 25px;
+  border-top: 1px solid #e8e8eb;
+
+  span {
+    color: #a1a1aa;
+  }
+}

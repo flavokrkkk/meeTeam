@@ -1,7 +1,12 @@
+import React, { FC } from "react";
 import styles from "./header.module.scss";
 
-const Header = () => {
-  return <header className={styles.container}>header</header>;
+interface IHeader {
+  children: React.ReactNode;
+}
+
+const Header: FC<IHeader> = ({ children }) => {
+  return <header className={styles.container}>{children}</header>;
 };
 
 export default Header;

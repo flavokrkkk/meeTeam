@@ -1,13 +1,14 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { INavigateData } from "../../../utils/navigate-data";
 import { FC, useMemo } from "react";
+
+import styles from "./sidebar-content-list.module.scss";
+import { INavigateData } from "../../../../shared/utils/navigate-data";
+import Button from "../../../../shared/ui/button/button";
 import {
   EBorderRadius,
   EButtonSizes,
   EButtonVariant,
-} from "../../../ui/button";
-import Button from "../../../ui/button/button";
-import styles from "./sidebar-content-list.module.scss";
+} from "../../../../shared/ui/button";
 
 interface ISidebarContentList {
   nav: INavigateData;
