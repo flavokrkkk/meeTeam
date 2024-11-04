@@ -39,8 +39,18 @@ button {
   background-color: #4763e4;
 }
 
-.outlined {
+.none {
   background-color: transparent;
+}
+
+.outlined {
+  border: 1px solid #5c73db;
+  background-color: white;
+  color: #5c73db;
+}
+
+.error {
+  background-color: red;
 }
 
 .textCenter {

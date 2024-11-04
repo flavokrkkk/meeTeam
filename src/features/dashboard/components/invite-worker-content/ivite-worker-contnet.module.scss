@@ -1,0 +1,28 @@
+.editAccount {
+  padding: 20px;
+  width: 500px;
+
+  h3 {
+    font-weight: 400;
+    padding-bottom: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .formGroup {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .buttonContainer {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+  }
+}

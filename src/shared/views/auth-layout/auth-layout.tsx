@@ -2,6 +2,7 @@ import { FC, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ERoutesNames } from "../../utils/routes-name";
 import LoginPage from "../../../features/auth/pages/LoginPage";
+import Layout from "../../../features/dashboard/views/layout/layout";
 
 interface IAuthLayout {
   children: React.ReactNode;
@@ -26,7 +27,17 @@ const AuthLayout: FC<IAuthLayout> = ({ children }) => {
     }
   }, [isAuth, pathname]);
 
-  return <div>{isAuth ? children : <LoginPage />}</div>;
+  return (
+    <div>
+      {isAuth ? (
+        <Layout>{children}</Layout>
+      ) : publicRoutes.includes(pathname as ERoutesNames) ? (
+        children
+      ) : (
+        <LoginPage />
+      )}
+    </div>
+  );
 };
 
 export default AuthLayout;

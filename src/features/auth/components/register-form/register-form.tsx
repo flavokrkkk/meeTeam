@@ -22,7 +22,7 @@ const RegisterForm = () => {
     try {
       await registerFx({ email: emailValue, lang: "ru" });
       if (registerFx.doneData) {
-        navigate(ERoutesNames.HOME);
+        navigate(ERoutesNames.DASHBOARD);
       }
     } catch (e) {
       Promise.reject(e);

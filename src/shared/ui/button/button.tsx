@@ -14,10 +14,12 @@ export const buttonClassesRounded: Record<EBorderRadius, string> = {
   [EBorderRadius.SM]: styles.smRounded,
 };
 
-export const buttonVariantClasses: Record<EButtonVariant, string> = {
+export const buttonVariantClasses: Record<EButtonVariant | "none", string> = {
   [EButtonVariant.OUTLINED]: styles.outlined,
   [EButtonVariant.SECONDARY]: styles.secondary,
   [EButtonVariant.DEFAULT]: styles.default,
+  [EButtonVariant.ERROR]: styles.error,
+  ["none"]: styles.none,
 };
 
 export const buttonTextClasses: Record<"start" | "end" | "center", string> = {
@@ -32,7 +34,7 @@ export interface InputProps
   sizes?: EButtonSizes;
   text?: "start" | "end" | "center";
   rounded?: EBorderRadius;
-  variant?: EButtonVariant;
+  variant?: EButtonVariant | "none";
 }
 const Button = React.forwardRef<HTMLButtonElement, InputProps>(
   (

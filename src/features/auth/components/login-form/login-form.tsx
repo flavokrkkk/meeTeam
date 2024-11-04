@@ -32,7 +32,7 @@ const LoginForm = () => {
     try {
       await loginFx({ ...loginData, lang: "ru" });
       if (loginFx.doneData) {
-        navigate(ERoutesNames.HOME);
+        navigate(ERoutesNames.DASHBOARD);
       }
     } catch (e) {
       Promise.reject(e);

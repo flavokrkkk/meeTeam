@@ -1,7 +1,7 @@
 import { createEffect } from "effector";
 import { Login, User } from "./user";
-import { $host } from "../../shared/api";
-import { IResponseRegisterData } from ".";
+import { $authHost, $host } from "../../shared/api";
+import { IMe, IResponseRegisterData } from ".";
 import { IResponse } from "..";
 
 export interface IRegisterRequest {
@@ -64,7 +64,6 @@ export const resetFx = createEffect<IResetRequest, IResponse<User>, Error>(
         "/resetPassword",
         requestBody
       );
-      console.log(data);
       return data;
     } catch (err) {
       console.error(err);
@@ -72,3 +71,14 @@ export const resetFx = createEffect<IResetRequest, IResponse<User>, Error>(
     }
   }
 );
+
+export const meFx = createEffect<void, IResponse<IMe>, Error>(async () => {
+  try {
+    const { data, status } = await $authHost.get<IResponse<IMe>>("/me");
+    if (status !== 200) throw new Error("Invaild status!");
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw new Error("Invaid request!");
+  }
+});

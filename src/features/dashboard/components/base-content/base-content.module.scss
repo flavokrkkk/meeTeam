@@ -1,0 +1,33 @@
+.container {
+  padding: 15px;
+  width: 100%;
+
+  h3 {
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
+
+  .contentSection {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin-bottom: 5px;
+      margin-top: 15px;
+    }
+  }
+
+  .buttonSection {
+    display: flex;
+    margin-top: 80px;
+    width: 350px;
+    gap: 10px;
+  }
+}

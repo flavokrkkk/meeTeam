@@ -1,41 +1,38 @@
 import { FC } from "react";
-import { ITableRows } from "../../utils/table-rows";
+import { ITableCols } from "../../utils/table-rows";
 import styles from "./table.module.scss";
-import { WorkerResponse } from "../../../entities/workers/worker";
-import Button from "../button/button";
-import { EBorderRadius, EButtonSizes } from "../button";
+import Loader from "../../../shared/ui/loader/loader";
 
-interface ITable {
-  cols: WorkerResponse[];
-  rows: ITableRows[];
+interface ITableRows {
+  [key: string]: any;
 }
 
-const Table: FC<ITable> = ({ cols, rows }) => {
+interface ITable {
+  cols: ITableCols[];
+  data: ITableRows[];
+  isLoading?: boolean;
+}
+
+const Table: FC<ITable> = ({ cols, data, isLoading }) => {
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <table className={styles.table}>
       <thead>
         <tr>
-          {rows.map((row, index) => (
+          {cols.map((row, index) => (
             <th key={index}>{row.title}</th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {cols.map(({ profile, status }, index) => (
+        {data.map((el, index) => (
           <tr key={index}>
-            <td>{profile?.last_name}</td>
-            <td>{profile?.first_name}</td>
-            <td>{profile?.personal_email}</td>
-            <td>{profile?.mobile_phone}</td>
-            <td>{status?.dismiss}</td>
-            <td style={{ display: "flex", gap: "5px" }}>
-              <Button sizes={EButtonSizes.LG} rounded={EBorderRadius.SM}>
-                Suspendre
-              </Button>
-              <Button sizes={EButtonSizes.LG} rounded={EBorderRadius.SM}>
-                Supprimer
-              </Button>
-            </td>
+            {cols.map((row) => (
+              <td>{row.render ? row.render(el.id) : el[row.key]}</td>
+            ))}
           </tr>
         ))}
       </tbody>

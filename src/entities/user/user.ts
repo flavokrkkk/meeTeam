@@ -1,6 +1,6 @@
 import { createStore } from "effector";
-import { loginFx, registerFx } from "./effects";
-import { IResponseRegisterData } from ".";
+import { loginFx, meFx, registerFx } from "./effects";
+import { IMe, IResponseRegisterData } from ".";
 
 export type User = {
   id: number;
@@ -26,4 +26,9 @@ export const loginStore = createStore<Login | null>(null).on(
 export const errorStore = createStore<string | null>(null).on(
   loginFx.failData,
   (_, data) => data.message
+);
+
+export const meStore = createStore<IMe | null>(null).on(
+  meFx.doneData,
+  (_, me) => me.data
 );

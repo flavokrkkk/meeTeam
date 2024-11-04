@@ -5,6 +5,7 @@ export const enum ERoutesNames {
   RESET = "/reset",
   DASHBOARD = "/dashboard",
   DASHBOARD_UTILISATEURS = "/dashboard/utilisateurs",
+  DASHBOARD_EDITION = "/dashboard/utilisateurs/edition/:id",
   DASHBOARD_BASE = "/dashboard/base",
   DASHBOARD_CONTROLE = "/dashboard/controle",
   DASHBOARD_WORKFLOW = "/dashboard/workflow",

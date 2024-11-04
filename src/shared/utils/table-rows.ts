@@ -1,8 +1,10 @@
 // import { WorkerResponse } from "../../entities/workers/worker";
 
-export interface ITableRows {
+export interface ITableCols {
   id: number;
   title: string;
+  key: string;
+  render?: (id: number) => JSX.Element;
 }
 
 export interface ITableColumn {
@@ -14,56 +16,35 @@ export interface ITableColumn {
   status: string;
 }
 
-export const tableRows: ITableRows[] = [
+export const tableColumns: ITableCols[] = [
   {
     id: 1,
     title: "Noms",
+    key: "noms",
   },
   {
     id: 2,
     title: "Prénoms",
+    key: "prénoms",
   },
   {
     id: 3,
     title: "E-mails",
+    key: "email",
   },
   {
     id: 4,
     title: "Téléphone",
+    key: "phone",
   },
   {
     id: 5,
     title: "Statut",
+    key: "statut",
   },
   {
     id: 6,
     title: "Actions",
+    key: "actions",
   },
 ];
-
-// export const tableCols: WorkerResponse[] = [
-//   {
-//     id: 1,
-//     email: "egoryarovitsyn1@gmail.com",
-//     lastName: "Yarovitsyn",
-//     name: "Egor",
-//     phone: "8-964-150-8338",
-//     status: "Actif",
-//   },
-//   {
-//     id: 1,
-//     email: "egoryarovitsyn1@gmail.com",
-//     lastName: "Yarovitsyn",
-//     name: "Egor",
-//     phone: "8-964-150-8338",
-//     status: "Actif",
-//   },
-//   {
-//     id: 1,
-//     email: "egoryarovitsyn1@gmail.com",
-//     lastName: "Yarovitsyn",
-//     name: "Egor",
-//     phone: "8-964-150-8338",
-//     status: "Actif",
-//   },
-// ];

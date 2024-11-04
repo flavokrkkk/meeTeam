@@ -25,9 +25,7 @@ const SidebarContentList: FC<ISidebarContentList> = ({ nav }) => {
         text="start"
         sizes={EButtonSizes.LG}
         rounded={EBorderRadius.SM}
-        variant={
-          isActivePath ? EButtonVariant.DEFAULT : EButtonVariant.OUTLINED
-        }
+        variant={isActivePath ? EButtonVariant.DEFAULT : "none"}
       >
         {nav.title}
       </Button>

@@ -14,4 +14,5 @@ export const enum EButtonVariant {
   SECONDARY,
   OUTLINED,
   DEFAULT,
+  ERROR,
 }

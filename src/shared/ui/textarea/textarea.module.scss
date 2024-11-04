@@ -1,0 +1,22 @@
+.textarea {
+  display: flex;
+  resize: none;
+  width: 100%;
+  padding: 10px;
+  border: 1px dashed #e4e4e7;
+  border-radius: 15px;
+  outline: none;
+  font-size: 0.875rem;
+
+  &::placeholder {
+    opacity: 0.5;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  height: 200px;
+  overflow: auto;
+}

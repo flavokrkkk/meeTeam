@@ -1,0 +1,49 @@
+.dashboardContainer {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  overflow: auto;
+  height: 100%;
+}
+
+.section {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 15px;
+}
+
+.headerWrapper {
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.title {
+  font-weight: 400;
+}
+
+.flexSection {
+  display: flex;
+  gap: 10px;
+}
+
+.tableContainer {
+  width: 400px;
+  position: relative;
+}
+
+.flexItem {
+  width: 100%;
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 150px;
+}

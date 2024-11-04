@@ -1,5 +1,5 @@
 import { createStore } from "effector";
-import { getWorkerFx } from "./effects";
+import { getWorkByIdFx, getWorkerFx } from "./effects";
 
 export type Worker = {
   city: null | string;
@@ -31,7 +31,7 @@ export type Worker = {
 
 export type WorkerResponse = {
   id: number;
-  departament: { id: number; name: string };
+  department: { id: number; name: string };
   groups: [];
   permissions: [];
   profile: Worker;
@@ -46,7 +46,33 @@ export type WorkerResponse = {
   };
 };
 
-export const workerStore = createStore<WorkerResponse[]>([]).on(
+export interface IRequestEditData {
+  id?: number;
+  portal_id: number;
+  local: "ru" | "en";
+  name_first: string | null;
+  name_last: string | null;
+  phone_work: string | null;
+  email_work: string | null;
+}
+
+export interface IInviteRequestData {
+  email: string;
+  name_first: string;
+  name_last: string;
+  portal_id: number;
+  type: "employee";
+}
+
+export const workersStore = createStore<WorkerResponse[]>([]).on(
   getWorkerFx.doneData,
   (_, data) => data.data
 );
+
+export const workerStore = createStore<WorkerResponse | null>(null).on(
+  getWorkByIdFx.doneData,
+  (_, data) => data.data
+);
+
+export const isLoadingWorker = getWorkByIdFx.pending;
+export const isLoadingWorkers = getWorkerFx.pending;

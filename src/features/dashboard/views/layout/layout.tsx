@@ -1,15 +1,21 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styles from "./layout.module.scss";
 import Sidebar from "../../../../shared/ui/sidebar/sidebar";
 import SidebarContent from "../../components/sidebar-content/sidebar-content";
 import Header from "../../../../shared/ui/header/header";
 import { EPathnameKeys } from "../../utils/nav-title";
 import HeaderContent from "../../components/header-content/header-content";
+import { FC, PropsWithChildren, useEffect } from "react";
+import { meFx } from "../../../../entities/user/effects";
 
-const Layout = () => {
+const Layout: FC<PropsWithChildren> = ({ children }) => {
   const { pathname } = useLocation();
 
   const pathnamePage = pathname.split("/")[2] as EPathnameKeys;
+
+  useEffect(() => {
+    meFx();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -20,9 +26,7 @@ const Layout = () => {
         <Header>
           <HeaderContent pathnamePage={pathnamePage} />
         </Header>
-        <div className={styles.outletWrapper}>
-          <Outlet />
-        </div>
+        <div className={styles.outletWrapper}>{children}</div>
       </div>
     </div>
   );
