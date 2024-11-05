@@ -106,7 +106,7 @@ const ParametresContent = () => {
         <SearchInput />
       </div>
 
-      <div className={styles.tableContainer} style={{ height: "670px" }}>
+      <div className={styles.tableContainer} style={{ height: "590px" }}>
         <Table data={tableRows} cols={tableColumns} isLoading={isLoading} />
         <div className={styles.footerContainer}>
           <span>Rhoncus montes arcu.</span>

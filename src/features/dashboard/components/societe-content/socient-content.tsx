@@ -98,7 +98,7 @@ const SocientContent = () => {
       <div className={styles.sectionSearch}>
         <SearchInput />
       </div>
-      <div className={styles.tableContainer} style={{ height: "670px" }}>
+      <div className={styles.tableContainer} style={{ height: "590px" }}>
         <Table data={dataRowTable} cols={tableColumns} />
         <div className={styles.footerContainer}>
           <span>100 utilisateurs</span>
