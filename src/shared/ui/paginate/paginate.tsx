@@ -24,7 +24,7 @@ const Paginate: FC<IPaginate> = ({ count, setActivePage }) => {
           size={{ height: 10, width: 10 }}
         />
       </div>
-      {paginate.map((p, i) => (
+      {paginate.map((_, i) => (
         <div
           key={i}
           onClick={() => handleSelectPage(i + 1)}
