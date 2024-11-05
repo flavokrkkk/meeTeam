@@ -1,0 +1,25 @@
+.tabsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.tabsHeader {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.tabItem {
+  padding-bottom: 2px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+
+  &.active {
+    border-bottom-color: #4763e4;
+  }
+}
+
+.tabContent {
+  height: 100vh;
+}

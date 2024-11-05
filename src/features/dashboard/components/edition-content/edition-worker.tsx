@@ -6,6 +6,9 @@ import Button from "../../../../shared/ui/button/button";
 import { EButtonSizes } from "../../../../shared/ui/button";
 import { editWorkerFx } from "../../../../entities/workers/effects";
 import { useValidate } from "../../../../shared/hooks/useValidate";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker-cssmodules.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 interface IEditionWorker {
   worker: WorkerResponse;
@@ -17,6 +20,8 @@ const EditionWorker: FC<IEditionWorker> = ({ worker }) => {
     name_last: worker?.profile.last_name,
     phone_work: worker?.profile.work_phone,
     email_work: worker?.profile.work_email,
+    date_of_birth: worker.profile?.date_of_birth ?? "",
+    date_of_employment: worker.profile?.date_of_employment ?? "",
   });
 
   const { error, handleValidate } = useValidate(workerData);
@@ -30,6 +35,24 @@ const EditionWorker: FC<IEditionWorker> = ({ worker }) => {
     },
     []
   );
+
+  const handleChangeDate = (date: Date | null) => {
+    if (date) {
+      setWorkerData((prevState) => ({
+        ...prevState,
+        date_of_employment: date?.toISOString(),
+      }));
+    }
+  };
+
+  const handleChangeDateOfBirth = (date: Date | null) => {
+    if (date) {
+      setWorkerData((prevState) => ({
+        ...prevState,
+        date_of_birth: date?.toISOString(),
+      }));
+    }
+  };
 
   const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -57,12 +80,7 @@ const EditionWorker: FC<IEditionWorker> = ({ worker }) => {
               onChange={handleChangeValue}
             />
             {error.email_work && (
-              <span
-                style={{
-                  color: "red",
-                  fontSize: "12px",
-                }}
-              >
+              <span className={styles.errorText}>
                 {error.email_work.message}
               </span>
             )}
@@ -75,19 +93,18 @@ const EditionWorker: FC<IEditionWorker> = ({ worker }) => {
               onChange={handleChangeValue}
             />
             {error.name_last && (
-              <span
-                style={{
-                  color: "red",
-                  fontSize: "12px",
-                }}
-              >
+              <span className={styles.errorText}>
                 {error.name_last?.message}
               </span>
             )}
           </div>
           <div className={styles.formGroup}>
             <label>Date de création de compte</label>
-            <Input />
+            <DatePicker
+              value={workerData.date_of_birth}
+              onChange={handleChangeDateOfBirth}
+              customInput={<Input />}
+            />
           </div>
         </section>
         <section>
@@ -99,12 +116,7 @@ const EditionWorker: FC<IEditionWorker> = ({ worker }) => {
               onChange={handleChangeValue}
             />
             {error.phone_work && (
-              <span
-                style={{
-                  color: "red",
-                  fontSize: "12px",
-                }}
-              >
+              <span className={styles.errorText}>
                 {error.phone_work?.message}
               </span>
             )}
@@ -117,19 +129,17 @@ const EditionWorker: FC<IEditionWorker> = ({ worker }) => {
               onChange={handleChangeValue}
             />
             {error.email_work && (
-              <span
-                style={{
-                  color: "red",
-                  fontSize: "12px",
-                }}
-              >
+              <span className={styles.errorText}>
                 {error.name_first?.message}
               </span>
             )}
           </div>
           <div className={styles.formGroup}>
             <label>Date de dernière connexion</label>
-            <Input />
+            <DatePicker
+              value={workerData.date_of_employment}
+              onChange={handleChangeDate}
+            />
           </div>
         </section>
       </div>

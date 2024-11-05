@@ -5,6 +5,7 @@ import {
   EButtonVariant,
 } from "../../../../shared/ui/button";
 import Button from "../../../../shared/ui/button/button";
+import styles from "./control-button.module.scss";
 
 interface IControlButton {
   id: number;
@@ -12,6 +13,7 @@ interface IControlButton {
     firstButton: string;
     secondButton: string;
   };
+  type?: "dismiss" | "worker";
   setDetailUser: (id: number) => void;
   setDissmisWorker: (body: { employee_id: number; dismiss: boolean }) => void;
 }
@@ -22,6 +24,7 @@ const ControlButton: FC<IControlButton> = ({
     firstButton: "Suspendre",
     secondButton: "Supprimer",
   },
+  type,
   setDissmisWorker,
   setDetailUser,
 }) => {
@@ -30,11 +33,11 @@ const ControlButton: FC<IControlButton> = ({
   };
 
   const handleDissmisWorker = () => {
-    setDissmisWorker({ dismiss: true, employee_id: id });
+    setDissmisWorker({ dismiss: type !== "dismiss", employee_id: id });
   };
 
   return (
-    <div style={{ display: "flex", gap: "5px" }}>
+    <div className={styles.controlContainer}>
       <Button
         sizes={EButtonSizes.LG}
         variant={EButtonVariant.OUTLINED}
@@ -44,7 +47,9 @@ const ControlButton: FC<IControlButton> = ({
         {title.firstButton}
       </Button>
       <Button
-        variant={EButtonVariant.ERROR}
+        variant={
+          type === "dismiss" ? EButtonVariant.SECONDARY : EButtonVariant.ERROR
+        }
         sizes={EButtonSizes.LG}
         rounded={EBorderRadius.SM}
         onClick={handleDissmisWorker}

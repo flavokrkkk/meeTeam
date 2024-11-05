@@ -1,5 +1,10 @@
 import { createStore } from "effector";
-import { getWorkByIdFx, getWorkerFx } from "./effects";
+import {
+  getDismissWorkerFx,
+  getWorkByIdFx,
+  getWorkerFx,
+  setWorkerFx,
+} from "./effects";
 
 export type Worker = {
   city: null | string;
@@ -46,6 +51,14 @@ export type WorkerResponse = {
   };
 };
 
+export interface IRequestCreate {
+  email_personal: string;
+  local: "ru" | "en";
+  name_first: string;
+  name_last: string;
+  portal_id: number;
+}
+
 export interface IRequestEditData {
   id?: number;
   portal_id: number;
@@ -64,13 +77,17 @@ export interface IInviteRequestData {
   type: "employee";
 }
 
-export const workersStore = createStore<WorkerResponse[]>([]).on(
-  getWorkerFx.doneData,
-  (_, data) => data.data
-);
+export const workersStore = createStore<WorkerResponse[]>([])
+  .on(getWorkerFx.doneData, (_, data) => data.data)
+  .on(setWorkerFx.doneData, (state, worker) => [...state, worker]);
 
 export const workerStore = createStore<WorkerResponse | null>(null).on(
   getWorkByIdFx.doneData,
+  (_, data) => data.data
+);
+
+export const dismissWorker = createStore<WorkerResponse[]>([]).on(
+  getDismissWorkerFx.doneData,
   (_, data) => data.data
 );
 

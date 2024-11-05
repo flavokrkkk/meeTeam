@@ -5,6 +5,7 @@ import styles from "./reset-form.module.scss";
 import { ERoutesNames } from "../../../../shared/utils/routes-name";
 import { ChangeEvent, useCallback, useState } from "react";
 import { resetFx } from "../../../../entities/user/effects";
+import { useValidate } from "../../../../shared/hooks/useValidate";
 
 const ResetForm = () => {
   const [resetData, setResetData] = useState({
@@ -14,6 +15,7 @@ const ResetForm = () => {
     newPassword: "",
   });
 
+  const { handleValidate, error } = useValidate(resetData);
   const navigate = useNavigate();
 
   const handleChangeValue = useCallback(
@@ -28,13 +30,16 @@ const ResetForm = () => {
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try {
-      await resetFx(resetData);
-      if (resetFx.doneData) {
-        navigate(ERoutesNames.LOGIN);
+    const { isError } = handleValidate();
+    if (!isError) {
+      try {
+        await resetFx(resetData);
+        if (resetFx.doneData) {
+          navigate(ERoutesNames.LOGIN);
+        }
+      } catch (e) {
+        Promise.reject(e);
       }
-    } catch (e) {
-      Promise.reject(e);
     }
   };
 
@@ -51,6 +56,9 @@ const ResetForm = () => {
           value={resetData.email}
           onChange={handleChangeValue}
         />
+        {error.email && (
+          <label className={styles.errorText}>{error.email.message}</label>
+        )}
       </section>
       <section className={styles.itemContainer}>
         <label>Numéro de téléphone</label>
@@ -59,6 +67,9 @@ const ResetForm = () => {
           value={resetData.phone}
           onChange={handleChangeValue}
         />
+        {error.phone && (
+          <label className={styles.errorText}>{error.phone.message}</label>
+        )}
       </section>
       <section className={styles.itemContainer}>
         <label>Mot de passe</label>
@@ -68,6 +79,9 @@ const ResetForm = () => {
           onChange={handleChangeValue}
           type="password"
         />
+        {error.password && (
+          <label className={styles.errorText}>{error.password.message}</label>
+        )}
       </section>
       <section className={styles.itemContainer}>
         <label>Confirmer votre mot de passe</label>
@@ -77,6 +91,11 @@ const ResetForm = () => {
           onChange={handleChangeValue}
           type="password"
         />
+        {error.newPassword && (
+          <label className={styles.errorText}>
+            {error.newPassword.message}
+          </label>
+        )}
       </section>
       <div className={styles.accepRegister}>
         <input type="checkbox" />

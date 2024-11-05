@@ -6,3 +6,22 @@
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4763e4;
+  border-radius: 2px;
+  transition: all 0.2s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d9ddff;
+}

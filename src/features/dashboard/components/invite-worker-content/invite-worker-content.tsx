@@ -4,14 +4,23 @@ import { EButtonSizes, EButtonVariant } from "../../../../shared/ui/button";
 import Button from "../../../../shared/ui/button/button";
 import { ChangeEvent, FC, FormEvent, useCallback, useState } from "react";
 import styles from "./ivite-worker-contnet.module.scss";
-import { inviteUserToWorkerFx } from "../../../../entities/workers/effects";
+import {
+  inviteUserToWorkerFx,
+  setWorkerFx,
+} from "../../../../entities/workers/effects";
 import { useValidate } from "../../../../shared/hooks/useValidate";
 
 interface IInviteWorkerContent {
+  mode: "added" | "invite";
   toggleModal: () => void;
+  setSuccess: () => void;
 }
 
-const InviteWorkerContent: FC<IInviteWorkerContent> = ({ toggleModal }) => {
+const InviteWorkerContent: FC<IInviteWorkerContent> = ({
+  toggleModal,
+  mode,
+  setSuccess,
+}) => {
   const [inviteData, setInviteData] = useState({
     email: "",
     name_first: "",
@@ -34,13 +43,30 @@ const InviteWorkerContent: FC<IInviteWorkerContent> = ({ toggleModal }) => {
     event.preventDefault();
     const { isError } = handleValidate();
     if (!isError) {
-      inviteUserToWorkerFx({ ...inviteData, type: "employee", portal_id: 1 });
+      if (mode === "invite") {
+        inviteUserToWorkerFx({
+          ...inviteData,
+          type: "employee",
+          portal_id: 1,
+        });
+        setSuccess();
+      } else if (mode === "added") {
+        setWorkerFx({
+          email_personal: inviteData.email,
+          portal_id: 1,
+          local: "ru",
+          name_first: inviteData.name_first,
+          name_last: inviteData.name_last,
+        });
+        setSuccess();
+      }
     }
+    toggleModal();
   };
 
   return (
     <section className={styles.editAccount}>
-      <h3>Editer un compte</h3>
+      <h3>{mode === "invite" ? "Invite un compte" : "Added un compte"}</h3>
       <form onSubmit={onFormSubmit}>
         <div className={styles.formGroup}>
           <label>Имя</label>
@@ -52,12 +78,7 @@ const InviteWorkerContent: FC<IInviteWorkerContent> = ({ toggleModal }) => {
             onChange={handleChangeInviteData}
           />
           {error.name_first && (
-            <span
-              style={{
-                color: "red",
-                fontSize: "12px",
-              }}
-            >
+            <span className={styles.errorText}>
               {error.name_first?.message}
             </span>
           )}
@@ -72,14 +93,7 @@ const InviteWorkerContent: FC<IInviteWorkerContent> = ({ toggleModal }) => {
             onChange={handleChangeInviteData}
           />
           {error.name_last && (
-            <span
-              style={{
-                color: "red",
-                fontSize: "12px",
-              }}
-            >
-              {error.name_last?.message}
-            </span>
+            <span className={styles.errorText}>{error.name_last?.message}</span>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -92,14 +106,7 @@ const InviteWorkerContent: FC<IInviteWorkerContent> = ({ toggleModal }) => {
             onChange={handleChangeInviteData}
           />
           {error.email && (
-            <span
-              style={{
-                color: "red",
-                fontSize: "12px",
-              }}
-            >
-              {error.email?.message}
-            </span>
+            <span className={styles.errorText}>{error.email?.message}</span>
           )}
         </div>
         <div className={styles.formGroup}>

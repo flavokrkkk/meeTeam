@@ -4,8 +4,11 @@ import styles from "./sidebar-content.module.scss";
 import { useCallback, useState } from "react";
 import SideBarContentItem from "../sidebar-content-item/sidebar-content-item";
 import { navigateData } from "../../../../shared/utils/navigate-data";
+import { useUnit } from "effector-react";
+import { meStore } from "../../../../entities/user/user";
 
 const SidebarContent = () => {
+  const meInfo = useUnit(meStore);
   const [navigates, setNavigates] = useState(navigateData);
 
   const handleIsActive = useCallback(
@@ -45,8 +48,8 @@ const SidebarContent = () => {
       <div className={styles.sidebarFooter}>
         <img src="/public/avatars/avatars.png" />
         <div className={styles.sidebarFooterInfo}>
-          <h5>Tim Cook</h5>
-          <span>timcook@force.com</span>
+          <h5>{meInfo?.main_user.name ?? ""}</h5>
+          <span>{meInfo?.main_user.email}</span>
         </div>
       </div>
     </div>

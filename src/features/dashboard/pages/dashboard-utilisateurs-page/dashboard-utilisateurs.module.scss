@@ -5,6 +5,11 @@
   height: 100%;
 }
 
+.containerWrapper {
+  display: flex;
+  gap: 10px;
+}
+
 .buttonWrapper {
   width: 226px;
 }
@@ -22,12 +27,24 @@
 .iconContainer {
   padding-left: 10px;
   padding-top: 2px;
+  span {
+    color: blue;
+  }
 }
 
 .footerContainer {
   padding: 25px;
   border-top: 1px solid #f4f4f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   span {
     color: #a1a1aa;
   }
+}
+
+.switchTypeContainer {
+  display: flex;
+  gap: 10px;
+  width: 460px;
 }

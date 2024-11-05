@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import SearchInput from "../../../../shared/components/search-input";
-import { EButtonSizes } from "../../../../shared/ui/button";
+import { EButtonSizes, EButtonVariant } from "../../../../shared/ui/button";
 import Button from "../../../../shared/ui/button/button";
 import Table from "../../../../shared/ui/table/table";
 import styles from "./dashboard-base.module.scss";
@@ -15,6 +15,8 @@ import ControlButton from "../../components/control-button/control-button";
 import Modal from "../../../../shared/ui/modal/Modal";
 import { updateDissmisWorkerFx } from "../../../../entities/workers/effects";
 import BaseContent from "../../components/base-content/base-content";
+import { baseColumns } from "../../../../shared/utils/tabs-data";
+import Paginate from "../../../../shared/ui/paginate/paginate";
 
 const DashboardBasePage = () => {
   const workers = useUnit(workersStore);
@@ -24,13 +26,16 @@ const DashboardBasePage = () => {
   const isLoading = useUnit(isLoadingWorkers);
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleIsVisible = (id: number) => {
-    setIsVisible((prevState) => !prevState);
-    const selectWorker = workers.findIndex((worker) => worker.id === id);
-    if (selectWorker !== -1) {
-      setSelectWorker(workers[selectWorker]);
-    }
-  };
+  const handleIsVisible = useCallback(
+    (id: number) => {
+      setIsVisible((prevState) => !prevState);
+      const selectWorker = workers.findIndex((worker) => worker.id === id);
+      if (selectWorker !== -1) {
+        setSelectWorker(workers[selectWorker]);
+      }
+    },
+    [workers]
+  );
 
   const onCloseModal = () => {
     setIsVisible(false);
@@ -45,21 +50,7 @@ const DashboardBasePage = () => {
 
   const tableColumns: ITableCols[] = useMemo(
     (): ITableCols[] => [
-      {
-        id: 1,
-        key: "libele",
-        title: "Libellé",
-      },
-      {
-        id: 2,
-        key: "codeIso",
-        title: "Code ISO",
-      },
-      {
-        id: 3,
-        key: "description",
-        title: "Description",
-      },
+      ...baseColumns,
       {
         id: 4,
         key: "actions",
@@ -130,17 +121,23 @@ const DashboardBasePage = () => {
   return (
     <div className={styles.dashboardContainer}>
       <section className={styles.section}>
-        <div className={styles.headerWrapper}>
-          <div className={styles.header}>
-            <h4 className={styles.title}>Liste des pays</h4>
-            <div>
-              <Button sizes={EButtonSizes.LG}>Ajouter</Button>
-            </div>
-          </div>
+        <div className={styles.containerHeader}>
+          <span>
+            <h3>Liste des sociétés</h3>
+          </span>
           <div>
-            <SearchInput />
+            <Button sizes={EButtonSizes.LG}>Ajouter</Button>
           </div>
-          <Table cols={tableColumns} data={tableRows} isLoading={isLoading} />
+        </div>
+        <div className={styles.sectionSearch}>
+          <SearchInput />
+        </div>
+        <div className={styles.tableContainer} style={{ height: "290px" }}>
+          <Table data={tableRows} cols={tableColumns} />
+          <div className={styles.footerContainer}>
+            <span>100 utilisateurs</span>
+            <Paginate count={5} setActivePage={(page) => console.log(page)} />
+          </div>
         </div>
       </section>
       <section className={styles.flexSection}>
@@ -161,6 +158,17 @@ const DashboardBasePage = () => {
               isLoading={isLoading}
             />
           </div>
+          <div className={styles.footerPaginate}>
+            <span>02 pays</span>
+            <div className={styles.footerPaginateWrapper}>
+              <Button variant={EButtonVariant.OUTLINED} sizes={EButtonSizes.MD}>
+                Précedent
+              </Button>
+              <Button variant={EButtonVariant.OUTLINED} sizes={EButtonSizes.MD}>
+                Suivant
+              </Button>
+            </div>
+          </div>
         </div>
         <div className={styles.flexItem}>
           <div className={styles.header}>
@@ -178,6 +186,17 @@ const DashboardBasePage = () => {
               data={tableRows}
               isLoading={isLoading}
             />
+          </div>
+          <div className={styles.footerPaginate}>
+            <span>02 pays</span>
+            <div className={styles.footerPaginateWrapper}>
+              <Button variant={EButtonVariant.OUTLINED} sizes={EButtonSizes.MD}>
+                Précedent
+              </Button>
+              <Button variant={EButtonVariant.OUTLINED} sizes={EButtonSizes.MD}>
+                Suivant
+              </Button>
+            </div>
           </div>
         </div>
       </section>

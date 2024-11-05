@@ -13,7 +13,7 @@ import DashboardCalendrierPage from "../../features/dashboard/pages/dashboard-ca
 import DashboardLayout from "../../features/dashboard/views/dashboard-layout/dashboard-layout";
 import AuthLayout from "../views/auth-layout/auth-layout";
 import DashboardEdition from "../../features/dashboard/pages/dashboard-utilisateurs-page/dashboard-edition/dashboard-edition";
-import DashboardControle from "../../features/dashboard/pages/dashboard-controle-page/dashboard-controle";
+import { DashboardControle } from "../../features/dashboard/pages/dashboard-controle-page/dashboard-controle";
 
 export const routes = createBrowserRouter([
   {

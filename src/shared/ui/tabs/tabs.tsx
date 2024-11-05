@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import styles from "./tabs.module.scss";
 
 export interface ITabsData {
   id: number;
@@ -23,23 +24,21 @@ const Tabs: FC<ITabs> = ({ tabsData }) => {
   };
 
   return (
-    <div style={{ display: "flex", gap: "15px", flexDirection: "column" }}>
-      <div style={{ display: "flex", gap: "15px" }}>
+    <div className={styles.tabsContainer}>
+      <div className={styles.tabsHeader}>
         {tabs.map((tab) => (
           <div
-            style={{
-              borderBottom: tab.isActive ? "2px solid #4763E4" : "",
-              paddingBottom: "2px",
-              cursor: "pointer",
-            }}
+            className={`${styles.tabItem} ${tab.isActive ? styles.active : ""}`}
             onClick={() => handleActiveTabs(tab.id)}
+            key={tab.id}
           >
             {tab.title}
           </div>
         ))}
       </div>
-
-      <div>{tabs.map((tab) => tab.isActive && tab.children)}</div>
+      <div className={styles.tabContent}>
+        {tabs.map((tab) => tab.isActive && tab.children)}
+      </div>
     </div>
   );
 };

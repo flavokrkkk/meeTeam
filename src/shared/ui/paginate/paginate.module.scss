@@ -1,0 +1,41 @@
+.paginateContainer {
+  display: flex;
+}
+
+.arrowButton {
+  border: 1px solid #e4e4e7;
+  height: 38px;
+  width: 41px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #71717a;
+
+  &:first-child {
+    border-start-start-radius: 10px;
+    border-end-start-radius: 10px;
+  }
+
+  &:last-child {
+    border-end-end-radius: 10px;
+    border-start-end-radius: 10px;
+  }
+}
+
+.pageButton {
+  border: 1px solid #e4e4e7;
+  height: 38px;
+  width: 41px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: none;
+  color: inherit;
+
+  &.pageButtonActive {
+    background: #4763e4;
+    color: #fff;
+  }
+}

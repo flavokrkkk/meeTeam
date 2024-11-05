@@ -5,10 +5,12 @@ import { ERoutesNames } from "../../../../shared/utils/routes-name";
 import styles from "./register-form.module.scss";
 import React, { ChangeEvent, useCallback, useState } from "react";
 import { registerFx } from "../../../../entities/user/effects";
+import { useValidate } from "../../../../shared/hooks/useValidate";
 
 const RegisterForm = () => {
   const [emailValue, setEmailValue] = useState("");
 
+  const { handleValidate, error } = useValidate({ emailValue });
   const navigate = useNavigate();
 
   const handleChangeValue = useCallback(
@@ -19,13 +21,16 @@ const RegisterForm = () => {
   );
   const onFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try {
-      await registerFx({ email: emailValue, lang: "ru" });
-      if (registerFx.doneData) {
-        navigate(ERoutesNames.DASHBOARD);
+    const { isError } = handleValidate();
+    if (!isError) {
+      try {
+        await registerFx({ email: emailValue, lang: "ru" });
+        if (registerFx.doneData) {
+          navigate(ERoutesNames.DASHBOARD);
+        }
+      } catch (e) {
+        Promise.reject(e);
       }
-    } catch (e) {
-      Promise.reject(e);
     }
   };
 
@@ -38,6 +43,9 @@ const RegisterForm = () => {
       <section className={styles.itemContainer}>
         <label>Adresse e-mail</label>
         <Input name="email" value={emailValue} onChange={handleChangeValue} />
+        {error.emailValue && (
+          <label className={styles.errorText}>{error.emailValue.message}</label>
+        )}
       </section>
       <section className={styles.footerForm}>
         <Button>Se connecter</Button>

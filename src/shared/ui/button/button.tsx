@@ -40,6 +40,7 @@ const Button = React.forwardRef<HTMLButtonElement, InputProps>(
   (
     {
       sizes = EButtonSizes.SM,
+      className,
       variant = EButtonVariant.DEFAULT,
       rounded = EBorderRadius.MD,
       text = "center",
@@ -51,7 +52,7 @@ const Button = React.forwardRef<HTMLButtonElement, InputProps>(
     return (
       <button
         type={type}
-        className={`${buttonSizesClasses[sizes]} ${buttonTextClasses[text]} ${buttonClassesRounded[rounded]} ${buttonVariantClasses[variant]}`}
+        className={`${buttonSizesClasses[sizes]} ${buttonTextClasses[text]} ${buttonClassesRounded[rounded]} ${buttonVariantClasses[variant]} ${className}`}
         ref={ref}
         {...props}
       />

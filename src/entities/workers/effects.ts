@@ -1,7 +1,12 @@
 import { createEffect } from "effector";
 import { $authHost } from "../../shared/api";
 import { IResponse } from "..";
-import { IInviteRequestData, IRequestEditData, WorkerResponse } from "./worker";
+import {
+  IInviteRequestData,
+  IRequestCreate,
+  IRequestEditData,
+  WorkerResponse,
+} from "./worker";
 
 export const getWorkerFx = createEffect<
   void,
@@ -91,5 +96,38 @@ export const inviteUserToWorkerFx = createEffect<
   } catch (err) {
     console.error(err);
     throw new Error("Failed to invite");
+  }
+});
+
+export const setWorkerFx = createEffect<IRequestCreate, WorkerResponse, Error>(
+  async (requestBody) => {
+    try {
+      const { data, status } = await $authHost.post(
+        "/administration/portal/1/employees",
+        requestBody
+      );
+      if (status !== 200) throw new Error("Invalid status code!");
+      return data;
+    } catch (err) {
+      console.error(err);
+      throw new Error("Failed request!");
+    }
+  }
+);
+
+export const getDismissWorkerFx = createEffect<
+  void,
+  IResponse<WorkerResponse[]>,
+  Error
+>(async () => {
+  try {
+    const { data, status } = await $authHost.get(
+      "/administration/portal/1/employees/dismiss"
+    );
+    if (status !== 200) throw new Error("Invaild status code!");
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw new Error("Invalid request!");
   }
 });

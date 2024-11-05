@@ -19,24 +19,28 @@ const Table: FC<ITable> = ({ cols, data, isLoading }) => {
   }
 
   return (
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          {cols.map((row, index) => (
-            <th key={index}>{row.title}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((el, index) => (
-          <tr key={index}>
-            {cols.map((row) => (
-              <td>{row.render ? row.render(el.id) : el[row.key]}</td>
+    <div className={styles.tableContainer}>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            {cols.map((row, index) => (
+              <th key={index}>{row.title}</th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {data.map((el, index) => (
+            <tr key={index}>
+              {cols.map((row) => (
+                <td key={row.key}>
+                  {row.render ? row.render(el.id) : el[row.key]}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

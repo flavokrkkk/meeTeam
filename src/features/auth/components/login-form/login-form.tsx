@@ -7,6 +7,7 @@ import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import { loginFx } from "../../../../entities/user/effects";
 import { useUnit } from "effector-react";
 import { errorStore } from "../../../../entities/user/user";
+import { useValidate } from "../../../../shared/hooks/useValidate";
 
 const LoginForm = () => {
   const error = useUnit(errorStore);
@@ -14,6 +15,8 @@ const LoginForm = () => {
     email: "",
     password: "",
   });
+
+  const { error: validateError, handleValidate } = useValidate(loginData);
 
   const navigate = useNavigate();
 
@@ -29,13 +32,16 @@ const LoginForm = () => {
 
   const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try {
-      await loginFx({ ...loginData, lang: "ru" });
-      if (loginFx.doneData) {
-        navigate(ERoutesNames.DASHBOARD);
+    const { isError } = handleValidate();
+    if (!isError) {
+      try {
+        await loginFx({ ...loginData, lang: "ru" });
+        if (loginFx.doneData) {
+          navigate(ERoutesNames.DASHBOARD);
+        }
+      } catch (e) {
+        Promise.reject(e);
       }
-    } catch (e) {
-      Promise.reject(e);
     }
   };
 
@@ -58,6 +64,11 @@ const LoginForm = () => {
           value={loginData.email}
           onChange={handleChangeValue}
         />
+        {validateError.email && (
+          <label className={styles.errorText}>
+            {validateError.email.message}
+          </label>
+        )}
       </section>
       <section className={styles.itemContainer}>
         <label className={error?.length ? styles.error : styles.default}>
@@ -69,6 +80,11 @@ const LoginForm = () => {
           value={loginData.password}
           onChange={handleChangeValue}
         />
+        {validateError.password && (
+          <label className={styles.errorText}>
+            {validateError.password.message}
+          </label>
+        )}
       </section>
       {error?.length && <p className={styles.error}>{error}</p>}
       <p onClick={navigateToReset}>Mot de passe oublié ?</p>

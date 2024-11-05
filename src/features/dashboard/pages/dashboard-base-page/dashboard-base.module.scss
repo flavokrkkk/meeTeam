@@ -7,9 +7,40 @@
 }
 
 .section {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  height: 74%;
+  border-radius: 20px;
+
+  .containerHeader {
+    padding-left: 25px;
+    padding-top: 25px;
+    padding-right: 25px;
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+      color: black;
+      font-weight: normal;
+    }
+  }
+
+  .sectionSearch {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 15px;
+  }
+
+  .tableContainer {
+    height: 295px;
+    background-color: #fff;
+    height: 100%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
 
 .headerWrapper {
@@ -34,7 +65,6 @@
 }
 
 .tableContainer {
-  width: 400px;
   position: relative;
 }
 
@@ -46,4 +76,31 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 150px;
+}
+
+.footerContainer {
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #f4f4f5;
+  span {
+    color: #a1a1aa;
+  }
+}
+
+.footerPaginate {
+  display: flex;
+  padding-top: 15px;
+  justify-content: space-between;
+  span {
+    color: blue;
+  }
+}
+
+.footerPaginateWrapper {
+  display: flex;
+  width: 250px;
+  gap: 5px;
+  padding-right: 30px;
 }
