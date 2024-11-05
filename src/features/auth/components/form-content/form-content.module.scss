@@ -1,7 +1,6 @@
-@import "../../../../shared/styles/mixins.scss";
-
 .container {
-  @include flex-center;
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   flex-direction: column;
 }

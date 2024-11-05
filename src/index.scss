@@ -25,3 +25,14 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #d9ddff;
 }
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin item-form {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,7 +1,6 @@
-@import "../../styles/index.scss";
-
 .itemContainer {
-  @include item-form;
+  display: flex;
+  flex-direction: column;
 }
 
 .formContainer {
